@@ -9,30 +9,18 @@ This file provides guidance to AI when working with the code in this repository.
 
 ## Technology Stack
 
-- **Language**: Python 3.12+
-- **Package Manager**: uv (fast Python package installer and resolver)
+- **Language**: Python 3.10+
+- **Package Manager**: poetry
 - **CLI Framework**: Click with Rich for enhanced output
 - **AI Integration**: Bedrock APIs and Strands Agents SDK.  Always look up documentation on how to use these properly.
 - **Testing**: pytest with asyncio support
 
 ## Development Setup
 
-### Prerequisites
-```bash
-# Install uv if not already installed
-curl -LsSf https://astral.sh/uv/install.sh | sh
-```
-
 ### Initial Setup
 ```bash
 # Install dependencies and create virtual environment
-uv sync
-
-# Install development dependencies
-uv sync --extra dev
-
-# Install the package in development mode
-uv pip install -e .
+poetry install
 ```
 
 ### Common Commands
@@ -40,34 +28,34 @@ uv pip install -e .
 **Development:**
 ```bash
 # Run tests
-uv run pytest
+poetry run pytest
 
 # Run tests with coverage
-uv run pytest --cov
+poetry run pytest --cov
 
 # Format code
-uv run black .
+poetry run black .
 
 # Lint code
-uv run ruff check .
+poetry run ruff check .
 
 # Type checking
-uv run mypy src/
+poetry run mypy src/
 
 # Install pre-commit hooks
-uv run pre-commit install
+poetry run pre-commit install
 ```
 
 **Building:**
 ```bash
 # Build package
-uv build
+poetry build
 ```
 
 **Running CLIs:**
 ```bash
 # Run Bedrock-based CLI (requires AWS credentials)
-uv run python src/stack_trace_cli.py
+poetry run python src/stack_trace_cli.py example_stacktrace_error.txt
 ```
 
 ## TODO List

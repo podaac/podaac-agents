@@ -7,7 +7,7 @@ from pathlib import Path
 from rich.console import Console
 from rich.panel import Panel
 
-from agents.stack_trace_agent import stack_trace_agent
+from podaac_agents.agents.stack_trace_agent import stack_trace_agent
 
 console = Console()
 

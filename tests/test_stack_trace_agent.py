@@ -3,7 +3,7 @@
 import pytest
 from pathlib import Path
 
-from agents.stack_trace_agent import stack_trace_agent
+from podaac_agents.agents.stack_trace_agent import stack_trace_agent
 from strands.agent.agent_result import AgentResult
 
 
