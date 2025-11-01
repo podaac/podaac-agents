@@ -5,7 +5,7 @@ description = "A growing collection of intelligent AI agents designed to assist 
 authors = [
     {name = "jamesfwood", url = "https://github.com/jamesfwood"}
 ]
-requires-python = ">=3.12"
+requires-python = ">=3.10"
 dependencies = [
     "strands-agents",
     "strands-agents-tools",
