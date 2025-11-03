@@ -23,7 +23,7 @@ async def main():
     )
     args = parser.parse_args()
     
-    console.print("[bold blue]podaac-agents[/bold blue]\n")
+    console.print("[bold blue]podaac-agents —– stack trace CLI[/bold blue]\n")
     
     error_file = Path(args.error_file)
     if not error_file.exists():
@@ -38,7 +38,7 @@ async def main():
     
     console.print(Panel(response.structured_output.detailed_summary, title="[green]Detailed Summary[/green]", border_style="green"))
     console.print(Panel(response.structured_output.short_summary, title="[yellow]Short Summary[/yellow]", border_style="yellow"))
-    console.print(Panel(response.structured_output.suggested_solution, title="[cyan]Solution[/cyan]", border_style="cyan"))
+    console.print(Panel(response.structured_output.suggested_solution, title="[cyan]Suggested Solution[/cyan]", border_style="cyan"))
     console.print(Panel(response.structured_output.analysis_run_time, title="[orange1]Analysis Run Time[/orange1]", border_style="orange1"))
     
     console.print(f"\n[dim]Tokens:[/dim] {response.metrics.accumulated_usage['totalTokens']:,} | "

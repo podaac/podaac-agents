@@ -30,7 +30,7 @@ And do not use a lot of words.  Keep it short and to the point.
 model = BedrockModel(
     model_id="us.anthropic.claude-haiku-4-5-20251001-v1:0",
     #model_id="openai.gpt-oss-120b-1:0",
-    max_tokens=1000,
+    #max_tokens=3000,
     temperature=0.0
 )
 
