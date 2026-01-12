@@ -45,5 +45,9 @@ async def main():
                   f"[dim]Execution Time:[/dim] {sum(response.metrics.cycle_durations):.2f}s | "
                   f"[dim]Tools:[/dim] {', '.join(response.metrics.tool_metrics.keys()) or 'None'}")
 
+def cli():
+    """Synchronous entry point for Poetry scripts."""
+    return asyncio.run(main())
+
 if __name__ == "__main__":
-    asyncio.run(main())
+    cli()
