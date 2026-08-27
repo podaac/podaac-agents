@@ -50,7 +50,7 @@ openrouter_model = OpenAIModel(
         "base_url": "https://openrouter.ai/api/v1",
         "api_key": os.getenv("OPENROUTER_API_KEY") or os.getenv("OPENAI_API_KEY"),
     },
-    model_id="nvidia/nemotron-3-nano-30b-a3b:free",
+    model_id="nvidia/nemotron-3.5-lightning:free",
     params={
         "temperature": 0.0,
     }
