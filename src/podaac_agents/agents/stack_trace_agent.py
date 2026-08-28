@@ -5,7 +5,9 @@ from strands.models import BedrockModel
 from strands.models.ollama import OllamaModel
 from strands.models.openai import OpenAIModel
 from strands import Agent
-from strands_tools import current_time
+from strands.vended_plugins.context_injector import ContextInjector
+from datetime import datetime
+from zoneinfo import ZoneInfo
 
 
 SYSTEM_PROMPT = """You are a StackTrace Analysis Agent, an expert at analyzing stack traces and providing clear, actionable error summary and possible solutions to fix the error.
@@ -15,7 +17,7 @@ Your role as a software engineer is to:
 2. Provide a clear summary of what went wrong.  Label this as "Detailed Summary" so it can be identified in the output.
 3. Also provide a short summary of the error in 10 words or less.  Label this as "Short Summary" so it can be identified in the output.
 4. Suggest specific, actionable fixes/solutions.  If you are showing a list, be sure to put each row on a new line.  Label this as "Suggested Solution" so it can be identified in the output.
-5. Use the current_time tool to add when the analysis was run.  Put in local Pacific time with timezone, and 12 hour format.  Be sure to include the date and time.
+5. Include when the analysis was run, using the current date and time provided to you in the context.  It is in local Pacific time with timezone, and 12 hour format.  Be sure to include the date and time.
 
 When analyzing stack traces:
 - Focus on the most relevant error information
@@ -50,7 +52,7 @@ openrouter_model = OpenAIModel(
         "base_url": "https://openrouter.ai/api/v1",
         "api_key": os.getenv("OPENROUTER_API_KEY") or os.getenv("OPENAI_API_KEY"),
     },
-    model_id="nvidia/nemotron-3.5-lightning:free",
+    model_id="nvidia/nemotron-3-super-120b-a12b:free",
     params={
         "temperature": 0.0,
     }
@@ -60,7 +62,13 @@ class StackTraceInfo(BaseModel):
     detailed_summary: str
     short_summary: str
     suggested_solution: str
-    analysis_run_time: str
+    analyzed_at: str
+
+# Define a dynamic function to inject fresh time on every turn.
+# render_content receives an injection context and returns the text to inject.
+def time_context_provider(context):
+    now = datetime.now(ZoneInfo("US/Pacific"))  # local Pacific time, with timezone
+    return f"The analysis was run at: {now.strftime('%A, %B %d, %Y, %I:%M %p %Z')}"
 
 
 # Create agent with the selected model and tools
@@ -69,7 +77,9 @@ stack_trace_agent = Agent(
     #model=ollama_model,
     #model=bedrock_model,
     model=openrouter_model,
-    tools=[current_time],
+    plugins=[
+        ContextInjector(time_context_provider)
+    ],
     system_prompt=SYSTEM_PROMPT,
     #callback_handler=None,
     structured_output_model=StackTraceInfo

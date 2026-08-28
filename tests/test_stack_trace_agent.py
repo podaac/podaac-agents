@@ -31,4 +31,4 @@ def test_stack_trace_agent_with_example_error():
     assert response.structured_output.detailed_summary is not None
     assert response.structured_output.short_summary is not None
     assert response.structured_output.suggested_solution is not None
-    assert response.structured_output.analysis_run_time is not None
+    assert response.structured_output.analyzed_at is not None
