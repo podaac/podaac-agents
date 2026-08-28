@@ -10,11 +10,11 @@ packages = [{include = "podaac_agents", from = "src"}]
 
 [tool.poetry.dependencies]
 python = "^3.10"
-strands-agents = {version = "^1.14.0", extras = ["ollama", "openai"]}
-strands-agents-tools = "^0.2.13"
+strands-agents = {version = "^1.54.0", extras = ["ollama", "openai"]}
+strands-agents-tools = "^0.8.6"
 
 [tool.poetry.group.dev.dependencies]
-pytest = "^8.2.1"
+pytest = "^9.1.1"
 
 [tool.poetry.scripts]
 stack-trace = "stack_trace_cli:cli"
